@@ -1,0 +1,263 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Nunito", sans-serif;
+  cursor: url('./mouse.png') 0 0, auto;
+}
+
+.scene {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: #87CEEB;
+  overflow: hidden;
+  cursor: url('./mouse.png') 0 0, auto;
+}
+
+.golf-scene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.birthday-text {
+  position: relative;
+  transform: none;
+  text-align: center;
+  margin: 0 auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  animation: float 3s ease-in-out infinite;
+}
+
+.headline {
+  white-space: nowrap;
+  color: #FFD700;
+  font-weight: 900;
+  font-size: min(4vw, 60px);
+}
+
+h1 {
+  font-size: 4vw;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.number {
+  font-size: min(6vw, 90px);
+  color: #FFD700;
+  font-weight: 900;
+}
+
+.name {
+  font-size: min(8vw, 120px);
+  font-weight: 900;
+  background: linear-gradient(to right, #FFD700, #FF6B6B);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: nameScale 4s ease-in-out infinite;
+}
+
+.tagline {
+  font-size: min(5vw, 75px);
+  margin-top: min(60px, 8vh);
+  font-weight: 700;
+  color: #FF6B6B;
+}
+
+.tagline strong {
+  font-weight: 900;
+}
+
+.click-text {
+  position: fixed;
+  bottom: min(40px, 5vh);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: min(1.5vw, 24px);
+  font-weight: 700;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  animation: clickFloat 2s ease-in-out infinite, rainbow 5s linear infinite;
+  z-index: 2;
+  cursor: url('./mouse.png') 0 0, pointer;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rainbow {
+  0% { color: #FF0000; }
+  17% { color: #FF8800; }
+  33% { color: #FFD700; }
+  50% { color: #00FF00; }
+  67% { color: #0088FF; }
+  83% { color: #8800FF; }
+  100% { color: #FF0000; }
+}
+
+/* Create a separate float animation for the click text */
+@keyframes clickFloat {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -20px);
+  }
+}
+
+.content-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+}
+
+/* Add media query for mobile adjustments */
+@media (max-aspect-ratio: 1/1) {
+  .golf-scene {
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    transform: none;
+  }
+  
+  .headline {
+    font-size: min(6vw, 60px);
+  }
+  
+  .number {
+    font-size: min(8vw, 90px);
+  }
+  
+  .name {
+    font-size: min(12vw, 120px);
+  }
+  
+  .tagline {
+    font-size: min(7vw, 75px);
+    margin-top: 10px;
+  }
+  
+  .click-text {
+    font-size: min(3vw, 24px);
+  }
+  
+  .text-container {
+    top: 47%; /* Move entire text container higher up from 50% */
+  }
+}
+
+/* Optional: Add these if you need to ensure the sun and golf elements maintain position */
+.sun-container, .golf-elements {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.hill {
+  vector-effect: non-scaling-stroke;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Remove the flag-container styles and update golf-elements */
+.golf-elements {
+  transform-origin: left bottom;
+  /* Remove the translate since we're positioning from left now */
+  transform: scale(min(1, calc(100vw/1000)));
+}
+
+/* Remove the previous media query for flag-container */
+
+/* Default sun position (mobile/narrow screens) */
+.sun-container {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Desktop sun position (wider screens) */
+@media (min-width: 768px) {
+  .sun-container {
+    transform: translateX(840px); /* Move sun to right side (80px from right edge) */
+  }
+}
+
+/* Add the scaling animation for JOE! */
+@keyframes nameScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Increase size by 10% at peak */
+  }
+}
+
+/* Make the sun glow */
+.sun-container circle {
+  animation: glow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); 
+  }
+  50% { 
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); 
+  }
+}
+
+/* Make the flag wave */
+.golf-elements path {
+  transform-origin: left;
+  animation: wave 4s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { 
+    transform: skewY(0deg); 
+  }
+  50% { 
+    transform: skewY(-10deg); 
+  }
+}
+
+@keyframes flagRainbow {
+  0% { fill: #FF0000; }
+  17% { fill: #FF8800; }
+  33% { fill: #FFD700; }
+  50% { fill: #00FF00; }
+  67% { fill: #0088FF; }
+  83% { fill: #8800FF; }
+  100% { fill: #FF0000; }
+}
